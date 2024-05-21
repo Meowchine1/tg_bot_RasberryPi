@@ -1,3 +1,4 @@
+
 #--------LEDS---------
 LED1 = 26 #  37 # 26 
 LED2 = 19 # 35 # 19 
@@ -7,4 +8,8 @@ SYGNAL = 5 #29 # 5
 
 MODE2_INTERVAL = 300000
 MINUTES = MODE2_INTERVAL / 6000
+BLINK_INTERVAL = 500
+
+# -------TELEGRAM -------------
+API_TOKEN = '6954679719:AAGiP1WfhiY8DV3ku-04w_eMwzlXs83SCZI'
 

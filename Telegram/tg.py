@@ -1,11 +1,13 @@
 
-API_TOKEN = '6954679719:AAGiP1WfhiY8DV3ku-04w_eMwzlXs83SCZI'
+ 
 
 from wiringPi.gpio_management import *
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButton
 from aiogram import F
-from telegram_menu import BaseMessage, TelegramMenuSession, NavigationHandler
+
+from wiringPi.config import API_TOKEN
+# from telegram_menu import BaseMessage, TelegramMenuSession, NavigationHandler
 
 CHAT_ID  = ""
 bot = Bot(token=API_TOKEN)
@@ -38,7 +40,7 @@ async def send_welcome(message: types.Message):
    await message.reply(reply_markup=keyboard)
 
 @dp.message(F.text.lower() == mode1)
-async def with_puree(message: types.Message):
+async def choose_mode1(message: types.Message):
     turnoff_mode2()
     turnoff_mode3()
     turnoff_releoff()
@@ -46,7 +48,7 @@ async def with_puree(message: types.Message):
     await message.reply("Прерывания включены") 
 
 @dp.message(F.text.lower() == mode2)
-async def without_puree(message: types.Message):
+async def choose_mode2(message: types.Message):
     turnoff_mode1()
     turnoff_mode3()
     turnoff_releoff()
@@ -54,7 +56,7 @@ async def without_puree(message: types.Message):
     await message.reply("Прерывания отключены временно на", MINUTES, "минут") 
    
 @dp.message(F.text.lower() == mode3)
-async def without_puree(message: types.Message):
+async def choose_mode3(message: types.Message):
     set_mode3()
     turnoff_mode2()
     turnoff_mode1()
@@ -62,7 +64,7 @@ async def without_puree(message: types.Message):
     await message.reply("Прерывания отключены") 
 
 @dp.message(F.text.lower() == mode4)
-async def without_puree(message: types.Message):
+async def get_inf(message: types.Message):
     await message.reply("Сейчас пришлю файл") 
     turnoff_mode1()
     turnoff_mode2()
