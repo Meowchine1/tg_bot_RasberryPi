@@ -2,7 +2,7 @@
  
 
 from wiringPi.gpio_management import *
-from aiogram import Bot, Dispatcher, executor, types
+from aiogram import Bot, Dispatcher, types
 from aiogram.types import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButton
 from aiogram import F
 
