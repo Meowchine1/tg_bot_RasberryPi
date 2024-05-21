@@ -2,7 +2,7 @@
 import RPi.GPIO as GPIO
 import time
 from enum import Enum
-from config import *
+from wiringPi.config import *
 
 class State(Enum):
     MODE1 = 0   # штатный режим, при прерывании сигнала переход в режим отключенного реле
