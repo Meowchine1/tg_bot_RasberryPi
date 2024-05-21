@@ -11,7 +11,7 @@ from wiringPi.config import API_TOKEN
 
 CHAT_ID  = ""
 bot = Bot(token=API_TOKEN)
-dp = Dispatcher(bot)
+dp = Dispatcher()
 
 mode1 = "Включить прерывание"
 mode2 = "Отключить прерывание временно"
@@ -71,5 +71,5 @@ async def get_inf(message: types.Message):
     turnoff_mode3()
     set_releoff()
 
-dp.start_polling()
+dp.start_polling(bot)
 # executor.start_polling(dp, skip_updates=True)
