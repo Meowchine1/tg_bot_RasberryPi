@@ -10,7 +10,6 @@ try:
         sygnal_val = input(SYGNAL)
 
         if app.state == State.MODE1:
-            GPIO.OUT(LED1, app.led1_state)
             if sygnal_val:
                 app.rele_state = 1
             else:    
@@ -31,7 +30,6 @@ try:
         elif app.state == State.RELEOFF:
             sendMessage("Прерывание включено")
             # send to tg bot one message
-
 
         GPIO.output(RELE, app.rele_state)
 except KeyboardInterrupt:
