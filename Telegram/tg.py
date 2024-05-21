@@ -71,4 +71,5 @@ async def get_inf(message: types.Message):
     turnoff_mode3()
     set_releoff()
 
-executor.start_polling(dp, skip_updates=True)
+dp.start_polling()
+# executor.start_polling(dp, skip_updates=True)
