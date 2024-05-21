@@ -5,6 +5,7 @@ from wiringPi.gpio_management import *
 from aiogram import Bot, Dispatcher, types
 from aiogram.types import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButton
 from aiogram import F
+from aiogram.filters.command import Command
 
 from wiringPi.config import API_TOKEN
 # from telegram_menu import BaseMessage, TelegramMenuSession, NavigationHandler
@@ -21,7 +22,7 @@ mode4 = "Посмотреть историю"
 def sendMessage(message):
     bot.send_message(CHAT_ID, message)
 
-@dp.message_handler(commands=['start'])
+@dp.message(Command("start"))
 async def send_welcome(message: types.Message):
    kb = [
        [
