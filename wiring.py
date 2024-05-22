@@ -10,6 +10,7 @@ try:
     while True:
         sygnal_val = GPIO.input(SYGNAL)
         app_state = get_state()
+        print("app_state:", app_state, "\n")
 
         if app_state == State.MODE1:
             if sygnal_val:
