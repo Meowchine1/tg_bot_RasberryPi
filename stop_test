@@ -3,7 +3,7 @@ PIDS=$(pgrep -f "tg_bot.py")
 
 # Убиваем найденные процессы
 if [ -n "$PIDS" ]; then
-    echo "Удаление процессов..."
+    echo "Удаление процессов tg_bot.py..."
     kill $PIDS
 else
     echo "tg_bot.py Процессы не найдены."
@@ -13,7 +13,7 @@ PIDS=$(pgrep -f "app_server.py")
 
 # Убиваем найденные процессы
 if [ -n "$PIDS" ]; then
-    echo "Удаление процессов..."
+    echo "Удаление процессов app_server.py..."
     kill $PIDS
 else
     echo "app_server.py Процессы не найдены."
@@ -24,7 +24,7 @@ PIDS=$(pgrep -f "wiring.py")
 
 # Убиваем найденные процессы
 if [ -n "$PIDS" ]; then
-    echo "Удаление процессов..."
+    echo "Удаление процессов  wiring.py ..."
     kill $PIDS
 else
     echo "wiring.py Процессы не найдены."

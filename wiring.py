@@ -8,12 +8,12 @@ from tg_bot import *
 
 try:
     while True:
-        sygnal_val = input(SYGNAL)
+        sygnal_val = GPIO.input(SYGNAL)
         app_state = get_state()
 
         if app_state == State.MODE1:
             if sygnal_val:
-                set_rele_state(GPIO.HIGH)
+                set_rele_state(1)
             else:    
                 turnoff_mode1()
                 set_releoff()
