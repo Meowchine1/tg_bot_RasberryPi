@@ -3,7 +3,7 @@
 
 from wiringPi.gpio_management import *
 from aiogram import Bot, Dispatcher, types
-from aiogram.types import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButton
+from aiogram.types  import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButton
 from aiogram import F
 from aiogram.filters.command import Command
 
@@ -66,11 +66,7 @@ async def choose_mode3(message: types.Message):
 
 @dp.message(F.text.lower() == mode4)
 async def get_inf(message: types.Message):
-    await message.reply("Сейчас пришлю файл") 
-    turnoff_mode1()
-    turnoff_mode2()
-    turnoff_mode3()
-    set_releoff()
+    await message.reply("Сейчас пришлю файл")
 
 dp.start_polling(bot)
 # executor.start_polling(dp, skip_updates=True)
