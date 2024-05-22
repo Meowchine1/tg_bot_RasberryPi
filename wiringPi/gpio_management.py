@@ -32,7 +32,7 @@ def set_mode2():
     set_state(State.MODE2) 
     set_rele_state(1) 
     led_st = set_led2_state(1)
-    GPIO.OUT(LED2, led_st) 
+    GPIO.output(LED2, led_st) 
     set_mode2_start_time(time.time()) 
 
 def set_mode3():
@@ -40,38 +40,38 @@ def set_mode3():
     set_rele_state(1)
     led_st1 = set_led1_state(1) 
     led_st3 = set_led3_state(1)
-    GPIO.OUT(LED1, led_st1) 
-    GPIO.OUT(LED3, led_st3) 
+    GPIO.output(LED1, led_st1) 
+    GPIO.output(LED3, led_st3) 
    
 def set_releoff():
     set_state(State.RELEOFF) 
     set_rele_state(0)
     led_st3 = set_led3_state(1)
-    GPIO.OUT(LED3, led_st3) 
+    GPIO.output(LED3, led_st3) 
 
 def turnoff_mode1():
     led_st1 = set_led1_state(0) 
-    GPIO.OUT(LED1, led_st1) 
+    GPIO.output(LED1, led_st1) 
 
 def turnoff_mode2():
     led_st = set_led2_state(0) 
-    GPIO.OUT(LED2, led_st) 
+    GPIO.output(LED2, led_st) 
 
 def turnoff_mode3():
     led_st1 = set_led1_state(0)
     led_st3 = set_led3_state(0) 
-    GPIO.OUT(LED1, led_st1) 
-    GPIO.OUT(LED3, led_st3) 
+    GPIO.output(LED1, led_st1) 
+    GPIO.output(LED3, led_st3) 
 
 def turnoff_releoff():
     led_st3 = set_led3_state(0)
-    GPIO.OUT(LED3, led_st3)
+    GPIO.output(LED3, led_st3)
     
 
 def blink_1_3():
     led1_state = set_led1_state(~get_led1_state())
     led3_state = set_led3_state(~get_led3_state())
 
-    GPIO.OUT(LED1, led1_state)
-    GPIO.OUT(LED3, led3_state)    
+    GPIO.output(LED1, led1_state)
+    GPIO.output(LED3, led3_state)    
 
