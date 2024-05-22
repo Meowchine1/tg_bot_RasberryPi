@@ -12,7 +12,6 @@ from wiringPi.config import API_TOKEN
 from aiogram import F
 from aiogram.filters import Command
 from wiringPi.gpio_management import *
-from wiring import app
 
 mode1 = "Включить прерывание"
 mode2 = "Отключить прерывание временно"
@@ -55,26 +54,11 @@ async def command_start_handler(message: Message) -> None:
     await message.answer(f'Привет, {html.bold(message.from_user.full_name)})), '
                          'хочешь поуправлять мной? Выбирай режим...', reply_markup=keyboard)
 
-
-# @dp.message()
-# async def echo_handler(message: Message) -> None:
-#     """
-#     Handler will forward receive a message back to the sender
-
-#     By default, message handler will handle all message types (like a text, photo, sticker etc.)
-#     """
-#     try:
-#         # Send a copy of the received message
-#         await message.send_copy(chat_id=message.chat.id)
-#     except TypeError:
-#         # But not all the types is supported to be copied so need to handle it
-#         await message.answer("Nice try!")
-
 def sendMessage(message):
     global CHAT_ID
     bot.send_message(CHAT_ID, message)
  
-@dp.message(F.text.lower() == "test")
+@dp.message(F.text == "test")
 async def any_message(message: Message):
     id = message.from_user.id
     await message.answer(
@@ -83,34 +67,34 @@ async def any_message(message: Message):
     )
     await bot.send_message(CHAT_ID, "time")
     
-@dp.message(F.text.lower() == mode1)
+@dp.message(F.text == mode1)
 async def any_message(message: Message):
     turnoff_mode2()
     turnoff_mode3()
     turnoff_releoff()
     set_mode1()
-    await message.reply("Прерывания включены") 
+    await message.reply("Режим 1. Отключение реле при отсутствии сигнала") 
     
 
-@dp.message(F.text.lower() == mode2)
+@dp.message(F.text == mode2)
 async def any_message(message: Message):
     turnoff_mode1()
     turnoff_mode3()
     turnoff_releoff()
     set_mode2()
-    await message.reply("Прерывания отключены временно на", MINUTES, "минут") 
+    await message.reply("Режим 2. Без прерываний на", MINUTES, "минут") 
     
     
-@dp.message(F.text.lower() == mode3)
+@dp.message(F.text == mode3)
 async def any_message(message: Message):
     set_mode3()
     turnoff_mode2()
     turnoff_mode1()
     turnoff_releoff()
-    await message.reply("Прерывания отключены")  
+    await message.reply("Режим 3. Без прерываний")  
 
 
-@dp.message(F.text.lower() == mode4)
+@dp.message(F.text == mode4)
 async def any_message(message: Message):
     await message.reply("Сейчас пришлю файл") 
     

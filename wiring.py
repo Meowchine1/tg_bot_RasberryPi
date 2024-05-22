@@ -3,7 +3,7 @@
 
 import multiprocessing as mp
 from wiringPi.gpio_management import *
-from Telegram.tg import *
+from tg_bot import *
 
 
 try:
