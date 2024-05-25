@@ -37,6 +37,9 @@ def get_led3_state():
 def set_led3_state(state: int):
     return send_command('set_led3_state', state)
 
+#get_rele_state
+#set_rele_state
+
 def get_rele_state():
     return send_command('get_rele_state')
 def set_rele_state(state: int):

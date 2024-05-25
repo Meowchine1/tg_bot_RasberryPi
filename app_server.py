@@ -4,7 +4,8 @@ from multiprocessing.connection import Listener
 from wiringPi.app import *
 
 app = App()
-
+#get_rele_state
+#set_rele_state
 # Создаем Listener для прослушивания запросов
 address = ('localhost', 9999)
 listener = Listener(address)
@@ -25,6 +26,9 @@ while True:
             # -------------- GET ---------------------
         elif command == "get_state":
             client.send(pickle.dumps(app.state))
+
+        elif command == "get_rele_state":
+            client.send(pickle.dumps(app.rele_state))
             
         elif command == "get_led1_state":
             client.send(pickle.dumps(app.led1_state))
@@ -45,6 +49,11 @@ while True:
         elif command == "set_state":
             app.state = new_data
             client.send(pickle.dumps(app.state))
+            print("Added data:", new_data)
+            
+        elif command == "set_rele_state":
+            app.rele_state = new_data
+            client.send(pickle.dumps(app.rele_state))
             print("Added data:", new_data)
             
         elif command == "set_led1_state":
