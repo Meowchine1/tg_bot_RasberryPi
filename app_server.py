@@ -50,7 +50,7 @@ while True:
             app.state = new_data
             client.send(pickle.dumps(app.state))
             print("Added data:", new_data)
-            
+
         elif command == "set_rele_state":
             app.rele_state = new_data
             client.send(pickle.dumps(app.rele_state))
@@ -80,5 +80,7 @@ while True:
             app.previousMillis = new_data
             client.send(pickle.dumps(app.previousMillis))
             print("Added data:", new_data)
+        else:
+            print("Wrong api command")    
 
     client.close()
