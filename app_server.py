@@ -19,7 +19,7 @@ while True:
         command, new_data = pickle.loads(data)
         if command == 'add_data':
             app.previousMillis = new_data
-            print("Added data:", new_data)
+            #print("Added data:", new_data)
         elif command == 'get_data':
             client.send(pickle.dumps(app.previousMillis))
             
