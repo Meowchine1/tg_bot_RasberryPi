@@ -13,7 +13,6 @@ try:
         if app_state == State.MODE1:
             if sygnal_val:
                 set_rele_state(1)
-                print("sygnal on")
             else:    
                 turnoff_mode1()
                 set_releoff()
