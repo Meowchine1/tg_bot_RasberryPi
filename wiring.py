@@ -10,8 +10,6 @@ try:
     while True:
         sygnal_val = GPIO.input(SYGNAL)
         app_state = get_state()
-        print("app_state:", app_state, "\n")
-
         if app_state == State.MODE1:
             if sygnal_val:
                 set_rele_state(1)
@@ -20,11 +18,13 @@ try:
                 turnoff_mode1()
                 set_releoff()
                 sendMessage("Произошло прерывание сигнала. Реле отключено!")
+                print("Произошло прерывание сигнала. Реле отключено!")
         elif app_state == State.MODE2:
             current_time = time.time() 
             if get_mode2_start_time() < current_time - MODE2_INTERVAL:
                 turnoff_mode2()
                 set_mode1()
+                print("Время второго режима истекло. Первый режим включен")
                 sendMessage("Время второго режима истекло. Первый режим включен.")
 
         elif app_state == State.MODE3:
