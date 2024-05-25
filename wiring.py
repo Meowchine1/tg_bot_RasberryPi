@@ -19,11 +19,13 @@ try:
             else:    
                 turnoff_mode1()
                 set_releoff()
+                sendMessage("Произошло прерывание сигнала. Реле отключено!")
         elif app_state == State.MODE2:
             current_time = time.time() 
             if get_mode2_start_time() < current_time - MODE2_INTERVAL:
                 turnoff_mode2()
                 set_mode1()
+                sendMessage("Время второго режима истекло. Первый режим включен.")
 
         elif app_state == State.MODE3:
             currentMillis = time.time() 
@@ -31,9 +33,7 @@ try:
                 blink_1_3()
                 set_previousMillis(currentMillis)
         
-        elif app_state == State.RELEOFF:
-            sendMessage("Произошло прерывание. Реле отключено!")
-            # send to tg bot one message
+        #elif app_state == State.RELEOFF:
 
         GPIO.output(RELE, get_rele_state())
 except KeyboardInterrupt:

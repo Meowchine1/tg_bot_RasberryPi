@@ -21,6 +21,11 @@ CHAT_ID  = 0
 # Bot token can be obtained via https://t.me/BotFather
 TOKEN = API_TOKEN
 
+def refresh_chatid(message: Message):
+    global CHAT_ID
+    CHAT_ID = message.chat.id
+    
+
 # All handlers should be attached to the Router (or Dispatcher)
 dp = Dispatcher()
 bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
@@ -48,8 +53,7 @@ async def command_start_handler(message: Message) -> None:
         resize_keyboard=True,
         input_field_placeholder="Выберите режим", 
      )
-    global CHAT_ID
-    CHAT_ID = message.chat.id
+    refresh_chatid(message)
      
     await message.answer(f'Привет, {html.bold(message.from_user.full_name)})), '
                          'хочешь поуправлять мной? Выбирай режим...', reply_markup=keyboard)
@@ -61,6 +65,7 @@ def sendMessage(message):
 @dp.message(F.text == "test")
 async def any_message(message: Message):
     id = message.from_user.id
+    refresh_chatid(message)
     await message.answer(
         "Hello, <b>world</b>!", 
         parse_mode=ParseMode.HTML
@@ -73,7 +78,9 @@ async def any_message(message: Message):
     turnoff_mode3()
     turnoff_releoff()
     set_mode1()
-    await message.reply("Режим 1. Отключение реле при отсутствии сигнала") 
+    print("mode1")
+    refresh_chatid(message)
+    await message.reply("Режим 1 включен. Реле отключится при пропаже сигнала") 
     
 
 @dp.message(F.text == mode2)
@@ -82,7 +89,11 @@ async def any_message(message: Message):
     turnoff_mode3()
     turnoff_releoff()
     set_mode2()
-    await message.reply("Режим 2. Без прерываний на", MINUTES, "минут") 
+    print("mode2")
+    refresh_chatid(message)
+    text = f"Режим 2. Без прерываний на {MINUTES} {TIME_NAME}"
+    await message.reply(text) 
+    
     
     
 @dp.message(F.text == mode3)
@@ -91,11 +102,15 @@ async def any_message(message: Message):
     turnoff_mode2()
     turnoff_mode1()
     turnoff_releoff()
+    print("mode3")
+    refresh_chatid(message)
     await message.reply("Режим 3. Без прерываний")  
 
 
 @dp.message(F.text == mode4)
 async def any_message(message: Message):
+    print("mode4")
+    refresh_chatid(message)
     await message.reply("Сейчас пришлю файл") 
     
     
