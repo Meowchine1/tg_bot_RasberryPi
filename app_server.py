@@ -59,7 +59,7 @@ while True:
         elif command == "set_led1_state":
             app.led1_state = new_data
             client.send(pickle.dumps(app.led1_state))
-            #print("Added data:", new_data)
+            print("led1:", new_data)
             
         elif command == "set_led2_state":
             app.led2_state = new_data
@@ -81,6 +81,6 @@ while True:
             client.send(pickle.dumps(app.previousMillis))
             #print("Added data:", new_data)
         else:
-            #print("Wrong api command")    
+            print("Wrong api command")    
 
     client.close()
