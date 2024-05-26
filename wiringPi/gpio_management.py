@@ -5,6 +5,9 @@ import time
 from wiringPi.config import *
 from app_api import *
 
+def current_milli_time():
+    return round(time.time() * 1000)
+
 #----------------------SETTING UP------------------------------------
 # Делаем сброс состояний портов (все конфигурируются на вход - INPUT)
 GPIO.cleanup()
@@ -33,7 +36,7 @@ def set_mode2():
     set_rele_state(1) 
     led_st = set_led2_state(1)
     GPIO.output(LED2, led_st) 
-    set_mode2_start_time(time.time()) 
+    set_mode2_start_time(current_milli_time()) 
 
 def set_mode3():
     set_state(State.MODE3) 
