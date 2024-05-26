@@ -14,22 +14,15 @@ from aiogram.filters import Command
 from wiringPi.gpio_management import *
 from multiprocessing import Process
 from datetime import datetime, timedelta
-
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
-mode1 = "Включить прерывание"
-mode2 = "Отключить прерывание временно"
-mode3 = "Отключить прерывание"
-mode4 = "Посмотреть историю"
 CHAT_ID  = 0
-# Bot token can be obtained via https://t.me/BotFather
 TOKEN = API_TOKEN
 
 def refresh_chatid(message: Message):
     global CHAT_ID
     CHAT_ID = message.chat.id
     
-
 # All handlers should be attached to the Router (or Dispatcher)
 dp = Dispatcher()
 bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
@@ -134,7 +127,7 @@ async def main() -> None:
     # And the run events dispatching
     
     scheduler = AsyncIOScheduler()
-    scheduler.add_job(send_message_by_timer, trigger="cron", second=2,  start_date=datetime.now())
+    scheduler.add_job(send_message_by_timer, trigger='interval', seconds=2, start_date=datetime.now())
     scheduler.start()
     await dp.start_polling(bot)
 
