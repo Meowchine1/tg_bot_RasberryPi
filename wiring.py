@@ -38,9 +38,10 @@ try:
 
         GPIO.output(RELE, get_rele_state())
 except KeyboardInterrupt:
+    print('interrupted!')
     GPIO.cleanup()
     sys.exit()
-    print('interrupted!')
+     
 
 
     
