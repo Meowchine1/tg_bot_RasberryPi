@@ -73,7 +73,7 @@ def turnoff_releoff():
 
 def blink_1_3():
     led1_state = set_led1_state(~get_led1_state())
-    print(f"led1_state = {led1_state}")
+    #print(f"led1_state = {led1_state}")
     led3_state = set_led3_state(~get_led3_state())
 
     GPIO.output(LED1, led1_state)
