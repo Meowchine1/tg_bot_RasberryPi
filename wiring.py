@@ -28,7 +28,7 @@ try:
 
         elif app_state == State.MODE3:
             currentMillis = current_milli_time()
-            print(f"current time = {currentMillis}, BLINK_INTERVAL = {BLINK_INTERVAL} \n")
+            #print(f"current time = {currentMillis}, BLINK_INTERVAL = {BLINK_INTERVAL} \n")
             if currentMillis - get_previousMillis() >= BLINK_INTERVAL:
                 blink_1_3()
                 set_previousMillis(currentMillis)     
