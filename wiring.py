@@ -3,7 +3,6 @@
 import sys
 import multiprocessing as mp
 from wiringPi.gpio_management import *
-from tg_bot import sendMessage
 
 try:
     set_mode1()
@@ -16,7 +15,7 @@ try:
             else:    
                 turnoff_mode1()
                 set_releoff()
-                sendMessage("Произошло прерывание сигнала. Реле отключено!")
+                push_message("Произошло прерывание сигнала. Реле отключено!")
                 print("Произошло прерывание сигнала. Реле отключено!")
         elif app_state == State.MODE2:
             current_time = current_milli_time()
@@ -25,11 +24,11 @@ try:
                 turnoff_mode2()
                 set_mode1()
                 print("Время второго режима истекло. Первый режим включен")
-                sendMessage("Время второго режима истекло. Первый режим включен.")
+                push_message("Время второго режима истекло. Первый режим включен.")
 
         elif app_state == State.MODE3:
             currentMillis = current_milli_time()
-            #print(f"current time = {currentMillis}, BLINK_INTERVAL = {BLINK_INTERVAL} \n")
+            print(f"current time = {currentMillis}, BLINK_INTERVAL = {BLINK_INTERVAL} \n")
             if currentMillis - get_previousMillis() >= BLINK_INTERVAL:
                 blink_1_3()
                 set_previousMillis(currentMillis)     

@@ -10,7 +10,7 @@ def current_milli_time():
 # # Делаем сброс состояний портов (все конфигурируются на вход - INPUT)
 # GPIO.cleanup()
 # Режим нумерации пинов - по названию (не по порядковому номеру на разъеме)
-GPIO.setmode(GPIO.BCM)
+# GPIO.setmode(GPIO.BCM)
 
 GPIO.setup(SYGNAL, GPIO.IN)
 GPIO.setup(LED1, GPIO.OUT)
@@ -71,7 +71,7 @@ def turnoff_releoff():
 
 def blink_1_3():
     led1_state = set_led1_state(not get_led1_state())
-    #print(f"led1_state = {led1_state}")
+    print(f"led1_state = {led1_state}")
     led3_state = set_led3_state(not get_led3_state())
 
     GPIO.output(LED1, led1_state)

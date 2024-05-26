@@ -1,4 +1,5 @@
 from wiringPi.state import *
+import queue
 
 class App:
     led1_state = 1
@@ -8,3 +9,4 @@ class App:
     mode2_start_time = 0
     previousMillis = 0
     state = State.MODE1
+    message_q = queue.Queue()

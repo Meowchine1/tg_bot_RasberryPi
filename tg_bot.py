@@ -12,6 +12,10 @@ from wiringPi.config import API_TOKEN
 from aiogram import F
 from aiogram.filters import Command
 from wiringPi.gpio_management import *
+from multiprocessing import Process
+from datetime import datetime, timedelta
+
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 mode1 = "Включить прерывание"
 mode2 = "Отключить прерывание временно"
@@ -65,18 +69,11 @@ async def sendMessage(message):
 
 # Функция для отправки сообщения через таймер
 async def send_message_by_timer():
-    while True:
-        # Задержка перед отправкой сообщения (например, 10 секунд)
-        await asyncio.sleep(10)
-
-        # ID пользователя, которому нужно отправить сообщение
-        global CHAT_ID
-        if CHAT_ID != 0:
-            # Текст сообщения
-            message_text = 'Привет! Это сообщение отправлено по таймеру.'
-            # Отправляем сообщение пользователю
-            await sendMessage(message_text)
-        
+    global CHAT_ID
+    print(CHAT_ID)
+    message = get_message()
+    if CHAT_ID != 0 and message:
+        await sendMessage(message)   
  
 @dp.message(F.text == "test")
 async def any_message(message: Message):
@@ -133,12 +130,15 @@ async def any_message(message: Message):
 
 async def main() -> None:
     # Initialize Bot instance with default bot properties which will be passed to all API calls
-     
     # стало (функцией-регистратором)
     #dp.message.register(any_message, F.text)
     # And the run events dispatching
-    asyncio.create_task(send_message_by_timer())
+    
+    scheduler = AsyncIOScheduler()
+    scheduler.add_job(send_message_by_timer, trigger="cron", second=2,  start_date=datetime.now())
+    scheduler.start()
     await dp.start_polling(bot)
+
 
 
 if __name__ == "__main__":

@@ -44,6 +44,11 @@ while True:
             
         elif command == "get_previousMillis":
             client.send(pickle.dumps(app.previousMillis))
+        elif command == "get_message":
+            if app.message_q.empty():
+                client.send(pickle.dumps(0))
+            else:     
+                client.send(pickle.dumps(app.message_q.get()))   
             
             # ---------------- SET ---------------------
         elif command == "set_state":
@@ -80,6 +85,8 @@ while True:
             app.previousMillis = new_data
             client.send(pickle.dumps(app.previousMillis))
             #print("Added data:", new_data)
+        elif command == "push_message":
+            app.message_q.put(new_data)  
         else:
             print("Wrong api command")    
 
