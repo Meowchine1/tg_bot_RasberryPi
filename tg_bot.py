@@ -60,7 +60,7 @@ async def command_start_handler(message: Message) -> None:
 
 async def sendMessage(message):
     global CHAT_ID
-    bot.send_message(CHAT_ID, message)
+    await bot.send_message(CHAT_ID, message)
 
 
 # Функция для отправки сообщения через таймер
