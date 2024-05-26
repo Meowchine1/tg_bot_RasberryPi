@@ -61,6 +61,22 @@ async def command_start_handler(message: Message) -> None:
 def sendMessage(message):
     global CHAT_ID
     bot.send_message(CHAT_ID, message)
+
+
+# Функция для отправки сообщения через таймер
+async def send_message_by_timer():
+    while True:
+        # Задержка перед отправкой сообщения (например, 10 секунд)
+        await asyncio.sleep(10)
+
+        # ID пользователя, которому нужно отправить сообщение
+        global CHAT_ID
+        if CHAT_ID != 0:
+            # Текст сообщения
+            message_text = 'Привет! Это сообщение отправлено по таймеру.'
+            # Отправляем сообщение пользователю
+            await sendMessage(message_text)
+        
  
 @dp.message(F.text == "test")
 async def any_message(message: Message):
@@ -121,6 +137,7 @@ async def main() -> None:
     # стало (функцией-регистратором)
     #dp.message.register(any_message, F.text)
     # And the run events dispatching
+    asyncio.create_task(send_message_by_timer())
     await dp.start_polling(bot)
 
 

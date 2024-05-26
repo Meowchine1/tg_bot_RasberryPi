@@ -6,13 +6,13 @@ from wiringPi.gpio_management import *
 from tg_bot import sendMessage
 
 try:
+    set_mode1()
     while True:
         sygnal_val = GPIO.input(SYGNAL)
         app_state = get_state()
         if app_state == State.MODE1:
             if sygnal_val:
                 set_rele_state(1)
-                set_led1_state(1)
             else:    
                 turnoff_mode1()
                 set_releoff()
