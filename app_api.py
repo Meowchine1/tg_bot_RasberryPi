@@ -56,5 +56,5 @@ def set_previousMillis(time: int):
 def get_message():
     return send_command('get_message')
 
-def push_message(message: str):
+def push_message(message):
     return send_command('push_message', message)
