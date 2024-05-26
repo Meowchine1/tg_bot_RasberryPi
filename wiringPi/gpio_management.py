@@ -10,6 +10,17 @@ def current_milli_time():
 # # Делаем сброс состояний портов (все конфигурируются на вход - INPUT)
 # GPIO.cleanup()
 GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(SYGNAL, GPIO.IN)
+GPIO.setup(LED1, GPIO.OUT)
+GPIO.setup(LED2, GPIO.OUT)
+GPIO.setup(LED3, GPIO.OUT)
+GPIO.setup(RELE, GPIO.OUT)
+GPIO.output(LED1, 0)
+GPIO.output(LED2, 0)
+GPIO.output(LED3, 0)
+GPIO.output(RELE, 0)
+
 # Режим нумерации пинов - по названию (не по порядковому номеру на разъеме)
 def setup_pin():
     GPIO.setmode(GPIO.BCM)
