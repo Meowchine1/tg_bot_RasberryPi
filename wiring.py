@@ -5,6 +5,7 @@ import multiprocessing as mp
 from wiringPi.gpio_management import *
 
 try:
+    setup_pin()
     set_mode1()
     while True:
         sygnal_val = GPIO.input(SYGNAL)
