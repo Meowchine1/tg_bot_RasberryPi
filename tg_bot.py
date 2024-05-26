@@ -62,18 +62,17 @@ async def command_start_handler(message: Message) -> None:
     await message.answer(f'Привет, {html.bold(message.from_user.full_name)})), '
                          'хочешь поуправлять мной? Выбирай режим...', reply_markup=keyboard)
 
-async def sendMessage(message):
-    global CHAT_ID
-    await bot.send_message(CHAT_ID, message)
-
 
 # Функция для отправки сообщения через таймер
 async def send_message_by_timer():
     global CHAT_ID
     print(CHAT_ID)
-    message = get_message()
-    if CHAT_ID != 0 and message:
-        await sendMessage(message)   
+    #push_message("Катя")
+     
+    if CHAT_ID != 0:
+        message = get_message()
+        if message:
+            await bot.send_message(CHAT_ID, message)
  
 @dp.message(F.text == "test")
 async def any_message(message: Message):
@@ -104,7 +103,7 @@ async def any_message(message: Message):
     set_mode2()
     print("mode2")
     refresh_chatid(message)
-    text = f"Режим 2. Без прерываний на {MINUTES} {TIME_NAME}"
+    text = f"Режим 2. Без прерываний на {TIME_MEASURE} {TIME_NAME}"
     await message.reply(text) 
     
     

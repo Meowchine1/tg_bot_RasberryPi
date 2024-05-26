@@ -86,7 +86,8 @@ while True:
             client.send(pickle.dumps(app.previousMillis))
             #print("Added data:", new_data)
         elif command == "push_message":
-            app.message_q.put(new_data)  
+            app.message_q.put(new_data)
+            client.send(pickle.dumps(1))
         else:
             print("Wrong api command")    
 

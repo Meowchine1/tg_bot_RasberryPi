@@ -57,4 +57,5 @@ def get_message():
     return send_command('get_message')
 
 def push_message(message):
+    print(message)
     return send_command('push_message', message)
