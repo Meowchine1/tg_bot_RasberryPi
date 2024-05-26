@@ -58,7 +58,7 @@ async def command_start_handler(message: Message) -> None:
     await message.answer(f'Привет, {html.bold(message.from_user.full_name)})), '
                          'хочешь поуправлять мной? Выбирай режим...', reply_markup=keyboard)
 
-def sendMessage(message):
+async def sendMessage(message):
     global CHAT_ID
     bot.send_message(CHAT_ID, message)
 
