@@ -1,7 +1,5 @@
-
 import RPi.GPIO as GPIO
 import time
- 
 from wiringPi.config import *
 from app_api import *
 

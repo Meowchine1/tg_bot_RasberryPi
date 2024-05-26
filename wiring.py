@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+import sys
 import multiprocessing as mp
 from wiringPi.gpio_management import *
 from tg_bot import sendMessage
@@ -38,6 +38,8 @@ try:
 
         GPIO.output(RELE, get_rele_state())
 except KeyboardInterrupt:
+    GPIO.cleanup()
+    sys.exit()
     print('interrupted!')
 
 
