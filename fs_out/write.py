@@ -1,18 +1,36 @@
-#!/usr/bin/python3
-from pathlib import *
+# #!/usr/bin/python3
 
-for txt_file in pathlib.Path('../logs').glob('*.txt'):
-    ptint(txt_file)
+from datetime import date, datetime
+import os 
+from os import listdir, path
+from os.path import isfile, join
+ 
+def write_log(relative_path, message):
+    log_data = f'[{datetime.now().time()} -- {message}]'
+    buffer = '' 
+    day_log = f"{relative_path}/logs/{date.today()}.txt"
 
 
-from datetime import date
+    if not os.path.exists(day_log):
+        with open(day_log, 'w') as file:
+            file.write(log_data) 
+    else:
+        with open(day_log, 'r') as file:
+            for line in file:
+                buffer += line
+            buffer += '\n' + log_data  
+        with open(day_log, 'w') as file:
+            file.write(buffer)
 
+ 
+ 
+def get_log_names(relative_path):
+    names = [f for f in listdir(relative_path+"/logs/") if isfile(join(relative_path+"logs/", f))]
+    names_filtered = []
+    for name in names:
+        name, ext = path.splitext(name)
+        names_filtered.append(name)
 
-def check_logfile(date):
-    for txt_file in pathlib.Path('../logs').glob('*.txt'):
-        ptint(txt_file)
-        # do something with "txt_file"
+    return names
 
-def write_log(message):
-    today = date.today()
 

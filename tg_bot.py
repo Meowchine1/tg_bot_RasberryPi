@@ -16,6 +16,8 @@ from multiprocessing import Process
 from datetime import datetime, timedelta
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
+from fs_out.write import write_log, get_log_names
+
 CHAT_ID  = 0
 TOKEN = API_TOKEN
 
@@ -85,7 +87,10 @@ async def any_message(message: Message):
     set_mode1()
     print("mode1")
     refresh_chatid(message)
-    await message.reply("Режим 1 включен. Реле отключится при пропаже сигнала") 
+    log = "Режим 1 включен. Реле отключится при пропаже сигнала"
+    write_log(".", log) 
+    await message.reply(log)
+     
     
 
 @dp.message(F.text == mode2)
@@ -96,8 +101,9 @@ async def any_message(message: Message):
     set_mode2()
     print("mode2")
     refresh_chatid(message)
-    text = f"Режим 2. Без прерываний на {TIME_MEASURE} {TIME_NAME}"
-    await message.reply(text) 
+    log = f"Режим 2. Без прерываний на {TIME_MEASURE} {TIME_NAME}"
+    write_log(".", log) 
+    await message.reply(log) 
     
     
     
@@ -109,14 +115,17 @@ async def any_message(message: Message):
     turnoff_releoff()
     print("mode3")
     refresh_chatid(message)
-    await message.reply("Режим 3. Без прерываний")  
+    log = "Режим 3. Без прерываний"
+    write_log(".", log)
+    await message.reply(log)  
 
 
 @dp.message(F.text == mode4)
 async def any_message(message: Message):
     print("mode4")
     refresh_chatid(message)
-    await message.reply("Сейчас пришлю файл") 
+    files = get_log_names(".")
+    await message.reply("Выберите дату") 
     
     
 
