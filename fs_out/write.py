@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+from pathlib import *
 
 for txt_file in pathlib.Path('../logs').glob('*.txt'):
     ptint(txt_file)
