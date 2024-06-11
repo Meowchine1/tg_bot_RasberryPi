@@ -1,7 +1,11 @@
+#/usr/bin/python3
+
 import os
 import signal
 import subprocess
 import RPi.GPIO as GPIO
+
+ GPIO.cleanup()
 
 # Запуск всех приложений
 subprocess.Popen(['python', './app_server.py'])
