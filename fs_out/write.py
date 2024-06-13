@@ -1,4 +1,4 @@
-##!/usr/bin/python3
+#!/usr/bin/python3
 
 from datetime import date, datetime
 import os 
@@ -25,6 +25,10 @@ def write_log(relative_path, message):
  
  
 def is_file_exist(relative_path, filename):
+    print(filename)  
+    if not filename.endswith('.txt'):
+        filename += ".txt"
+    print(filename)    
     day_log = f"{relative_path}/logs/{filename}"
     return os.path.exists(day_log)
 
@@ -91,5 +95,5 @@ def get_file_name(mounth, day):
 
 #print(get_log_names("..", 7))
 
-# print(is_file_exist("..", "2024-06-10"))
+#print(is_file_exist("..", "2024-06-10"))
 # print(get_log_names(".."))
