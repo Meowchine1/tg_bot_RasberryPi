@@ -168,7 +168,7 @@ async def callbacks_num(callback: types.CallbackQuery):
         await bot.send_document(CHAT_ID, file_out)
 
 
-@dp.callback_query(F.data.startswith("history"))
+@dp.callback_query(F.data == "history")
 async def callbacks_num(callback: types.CallbackQuery):
     builder = InlineKeyboardBuilder()
     months = get_months(".")
