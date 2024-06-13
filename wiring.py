@@ -20,7 +20,7 @@ try:
                 mess = "Произошло прерывание сигнала. Реле отключено!"
                 push_message(mess)
                 #print(mess)
-                write_log(".", mess)
+                #write_log(".", mess)
         elif app_state == State.MODE2:
             current_time = current_milli_time()
             #print(f"current time = {current_time}, mode2_start = {get_mode2_start_time()} \n")
@@ -30,7 +30,7 @@ try:
                 mess = "Время второго режима истекло. Первый режим включен"
                 #print("Время второго режима истекло. Первый режим включен")
                 push_message("Время второго режима истекло. Первый режим включен.")
-                write_log(".", mess)
+                #write_log(".", mess)
 
         elif app_state == State.MODE3:
             currentMillis = current_milli_time()

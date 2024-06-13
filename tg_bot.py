@@ -56,6 +56,9 @@ async def command_start_handler(message: Message) -> None:
 async def send_message_by_timer():
     global CHAT_ID
     print(CHAT_ID)
+
+    # refresh logs
+
      
     if CHAT_ID != 0:
         message = get_message()
@@ -81,7 +84,7 @@ async def any_message(message: Message):
     print("mode1")
     refresh_chatid(message)
     log = "Режим 1 включен. Реле отключится при пропаже сигнала"
-    write_log(".", log) 
+    #write_log(".", log) 
     await message.reply(log)
      
     
@@ -95,7 +98,7 @@ async def any_message(message: Message):
     print("mode2")
     refresh_chatid(message)
     log = f"Режим 2. Без прерываний на {TIME_MEASURE} {TIME_NAME}"
-    write_log(".", log) 
+    #write_log(".", log) 
     await message.reply(log) 
     
     
@@ -109,7 +112,7 @@ async def any_message(message: Message):
     print("mode3")
     refresh_chatid(message)
     log = "Режим 3. Без прерываний"
-    write_log(".", log)
+    #write_log(".", log)
     await message.reply(log)  
 
 
@@ -134,22 +137,12 @@ async def any_message(message: Message):
 async def callbacks_num(callback: types.CallbackQuery):
     log_file_name = callback.data.split("_")[1]
     if not is_file_exist(".", log_file_name):
-        print("system error")
+        await callback.answer("Ошибка бота, файл не найден")
     else:
         file_out = FSInputFile("./" + log_file_name)
         await bot.send_document(CHAT_ID, file_out)
-        #await bot.send_document(user_id, open(filename, 'rb'))  
-    
 
-    await callback.answer()
-
-    #await message.reply("Выберите дату") 
-    # keyboard = types.InlineKeyboardMarkup()
-    # for file in files:
-    #     keyboard.add(types.InlineKeyboardButton(text=file, callback_data=f"file_{file}"))
-    # await message.reply("Выберите дату", reply_markup=keyboard)
-    
-
+    # await callback.answer()
 
 
 

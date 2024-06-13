@@ -11,6 +11,7 @@ import RPi.GPIO as GPIO
 subprocess.Popen(['python', './app_server.py'])
 subprocess.Popen(['python', './tg_bot.py'])
 subprocess.Popen(['python', './wiring.py'])
+subprocess.Popen(['python', './logger.py'])
 
 try:
     while True:
@@ -21,3 +22,4 @@ except KeyboardInterrupt:
     os.system("pkill -f 'python ./app_server.py'")
     os.system("pkill -f 'python ./tg_bot.py'")
     os.system("pkill -f 'python ./wiring.py'")
+    os.system("pkill -f 'python ./logger.py'")

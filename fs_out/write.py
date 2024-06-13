@@ -6,7 +6,7 @@ from os import listdir, path
 from os.path import isfile, join
  
 def write_log(relative_path, message):
-    log_data = f'[{datetime.now().time()} -- {message}]'
+    log_data = f'[{datetime.now().time()} | message: {message}]'
     buffer = '' 
     day_log = f"{relative_path}/logs/{date.today()}.txt"
 
