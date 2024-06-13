@@ -3,7 +3,7 @@ import logging
 import sys
 import multiprocessing as mp
 from aiogram.types  import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButton , \
-    InlineKeyboardMarkup, InlineKeyboardButton
+    InlineKeyboardMarkup, InlineKeyboardButton, FSInputFile
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram import Bot, Dispatcher, html, types
 from aiogram.client.default import DefaultBotProperties
@@ -118,7 +118,9 @@ async def any_message(message: Message):
     print("mode4")
     refresh_chatid(message)
     files = get_log_names(".")
-    print(files)
+    if files == []:
+        await message.answer("История пуста")
+
     builder = InlineKeyboardBuilder()
 
     for file in files:
@@ -134,7 +136,9 @@ async def callbacks_num(callback: types.CallbackQuery):
     if not is_file_exist(".", log_file_name):
         print("system error")
     else:
-        print("file exist")    
+        file_out = FSInputFile("./" + log_file_name)
+        await bot.send_document(CHAT_ID, file_out)
+        #await bot.send_document(user_id, open(filename, 'rb'))  
     
 
     await callback.answer()
