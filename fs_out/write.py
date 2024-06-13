@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+##!/usr/bin/python3
 
 from datetime import date, datetime
 import os 
@@ -89,7 +89,7 @@ def get_file_name(mounth, day):
 #print(get_days(".."))
 #print(get_mounths(".."))
 
-print(get_log_names("..", 7))
+#print(get_log_names("..", 7))
 
 # print(is_file_exist("..", "2024-06-10"))
 # print(get_log_names(".."))
