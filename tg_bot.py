@@ -156,7 +156,7 @@ async def callbacks_num(callback: types.CallbackQuery):
         log_file_name = get_file_name(month, day)
 
     else:
-        log_file_name = callback_data[1]
+        log_file_name = callback_data[1] + ".txt"
     
     print(f'log_file_name = {log_file_name}')
 
