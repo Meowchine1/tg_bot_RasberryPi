@@ -139,7 +139,7 @@ async def callbacks_num(callback: types.CallbackQuery):
     if not is_file_exist(".", log_file_name):
         await callback.answer("Ошибка бота, файл не найден")
     else:
-        file_out = FSInputFile("./" + log_file_name)
+        file_out = FSInputFile("./logs/" + log_file_name)
         await bot.send_document(CHAT_ID, file_out)
 
     # await callback.answer()
