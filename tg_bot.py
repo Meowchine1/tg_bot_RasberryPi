@@ -126,7 +126,7 @@ async def any_message(message: Message):
             text=file,
             callback_data=f"log_{file}")
         )   
-    await message.reply("Выберите дату", reply_markup=builder.as_markup())     
+    await message.answer("Выберите дату", reply_markup=builder.as_markup())     
 
 @dp.callback_query(F.data.startswith("log_"))
 async def callbacks_num(callback: types.CallbackQuery):
