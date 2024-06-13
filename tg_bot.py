@@ -139,9 +139,9 @@ async def any_message(message: Message):
    
     builder.add(types.InlineKeyboardButton(
             text="Найти файл более старый лог-файл",
-            callback_data="history", width=3, height=2)
+            callback_data="history", height=2)
         )
-    builder.adjust(3, 2)
+    builder.adjust(1)
 
     await message.answer("Выберите дату", reply_markup=builder.as_markup())     
 
