@@ -30,7 +30,7 @@ def is_file_exist(relative_path, filename):
 
 
 def get_log_names(relative_path):
-    names = [f for f in listdir(relative_path+"/logs/") if isfile(join(relative_path+"logs/", f))]
+    names = [f for f in listdir(relative_path+"/logs/") if isfile(join(relative_path+"/logs/", f))]
     names_filtered = []
     for name in names:
         name, ext = path.splitext(name)
@@ -40,3 +40,4 @@ def get_log_names(relative_path):
 
 
 # print(is_file_exist("..", "2024-06-10"))
+# print(get_log_names(".."))
