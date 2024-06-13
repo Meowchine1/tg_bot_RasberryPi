@@ -149,7 +149,7 @@ async def any_message(message: Message):
 async def callbacks_num(callback: types.CallbackQuery):
 
     callback_data = callback.data.split("_")
-
+    print(f'LEN REQUEST = {len(callback_data)}')
     if len(callback_data) > 2:
         month = callback_data[1]
         day =  callback_data[2]
@@ -157,6 +157,8 @@ async def callbacks_num(callback: types.CallbackQuery):
 
     else:
         log_file_name = callback_data[1]
+    
+    print(f'log_file_name = {log_file_name}')
 
 
     if not is_file_exist(".", log_file_name):
