@@ -3,7 +3,8 @@ import logging
 import sys
 import multiprocessing as mp
 from aiogram.types  import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButton , \
-    InlineKeyboardMarkup, InlineKeyboardButton, InlineKeyboardBuilder
+    InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram import Bot, Dispatcher, html, types
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
