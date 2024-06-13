@@ -118,7 +118,7 @@ async def any_message(message: Message):
     print("mode4")
     refresh_chatid(message)
     files = get_log_names(".")
-    
+    print(files)
     builder = InlineKeyboardBuilder()
 
     for file in files:
