@@ -10,15 +10,16 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart
 from aiogram.types import Message
-from wiringPi.config import API_TOKEN
 from aiogram import F
 from aiogram.filters import Command
+from aiogram.utils.markdown import hbold
 from wiringPi.gpio_management import *
 from multiprocessing import Process
 from datetime import datetime, timedelta
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
-from fs_out.write import write_log, get_log_names, is_file_exist
+from wiringPi.config import API_TOKEN
+from fs_out.write import write_log, get_log_names, is_file_exist, get_months, get_days, get_file_name
 
 CHAT_ID  = 0
 TOKEN = API_TOKEN
@@ -65,6 +66,9 @@ async def send_message_by_timer():
         if message:
             await bot.send_message(CHAT_ID, message)
  
+
+
+
 @dp.message(F.text == "test")
 async def any_message(message: Message):
     id = message.from_user.id
@@ -120,7 +124,8 @@ async def any_message(message: Message):
 async def any_message(message: Message):
     print("mode4")
     refresh_chatid(message)
-    files = get_log_names(".")
+    #files = get_log_names(".")
+    files = get_log_names(".", 7)
     if files == []:
         await message.answer("История пуста")
 
@@ -130,19 +135,62 @@ async def any_message(message: Message):
         builder.add(types.InlineKeyboardButton(
             text=file.split(".")[0],
             callback_data=f"log_{file}")
-        )   
+        )
+
+    builder.add(types.InlineKeyboardButton(
+            text="Найти файл более старый лог-файл",
+            callback_data="history")
+        )
+
     await message.answer("Выберите дату", reply_markup=builder.as_markup())     
 
 @dp.callback_query(F.data.startswith("log_"))
 async def callbacks_num(callback: types.CallbackQuery):
-    log_file_name = callback.data.split("_")[1]
+
+    callback_data = callback.data.split("_")
+
+    if len(callback_data) > 2:
+        month = callback_data[1]
+        day =  callback_data[2]
+        log_file_name = get_file_name(month, day)
+
+    else:
+        log_file_name = callback_data[1]
+
+
     if not is_file_exist(".", log_file_name):
         await callback.answer("Ошибка бота, файл не найден")
     else:
         file_out = FSInputFile("./logs/" + log_file_name)
         await bot.send_document(CHAT_ID, file_out)
 
-    # await callback.answer()
+
+@dp.callback_query(F.data.startswith("history"))
+async def callbacks_num(callback: types.CallbackQuery):
+    builder = InlineKeyboardBuilder()
+    months = get_months(".")
+    for month in months:
+        builder.add(types.InlineKeyboardButton(
+            text=month,
+            callback_data=f"month_{month}")
+        )
+
+    await message.answer("Выберите месяц", reply_markup=builder.as_markup())    
+    
+
+
+@dp.callback_query(F.data.startswith("month_"))
+async def callbacks_num(callback: types.CallbackQuery):
+    mounth = callback.data.split("_")[1]
+    days = get_days(".")
+    builder = InlineKeyboardBuilder()
+
+    for day in days:
+        builder.add(types.InlineKeyboardButton(
+            text=day,
+            callback_data=f"log_{day}_{mounth}")
+        )
+    #await message.answer("Теперь выберите день", reply_markup=builder.as_markup())    
 
 
 

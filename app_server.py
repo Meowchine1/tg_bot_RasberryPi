@@ -19,7 +19,7 @@ while True:
         command, new_data = pickle.loads(data)
         if command == 'add_data':
             app.previousMillis = new_data
-            #print("Added data:", new_data)
+
         elif command == 'get_data':
             client.send(pickle.dumps(app.previousMillis))
             
@@ -54,37 +54,31 @@ while True:
         elif command == "set_state":
             app.state = new_data
             client.send(pickle.dumps(app.state))
-            #print("Added data:", new_data)
 
         elif command == "set_rele_state":
             app.rele_state = new_data
             client.send(pickle.dumps(app.rele_state))
-            #print("Added data:", new_data)
             
         elif command == "set_led1_state":
             app.led1_state = new_data
             client.send(pickle.dumps(app.led1_state))
-            #print("led1:", new_data)
             
         elif command == "set_led2_state":
             app.led2_state = new_data
             client.send(pickle.dumps(app.led2_state))
-            #print("Added data:", new_data)
             
         elif command == "set_led3_state":
             app.led3_state = new_data
             client.send(pickle.dumps(app.led3_state))
-            #print("Added data:", new_data)
             
         elif command == "set_mode2_start_time":
             app.mode2_start_time = new_data
             client.send(pickle.dumps(app.mode2_start_time))
-            #print("Added data:", new_data)
             
         elif command == "set_previousMillis":
             app.previousMillis = new_data
             client.send(pickle.dumps(app.previousMillis))
-            #print("Added data:", new_data)
+
         elif command == "push_message":
             app.message_q.put(new_data)
             client.send(pickle.dumps(1))
