@@ -18,7 +18,7 @@ from multiprocessing import Process
 from datetime import datetime, timedelta
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
-from fs_out.write import write_log, get_log_names
+from fs_out.write import write_log, get_log_names, is_file_exist
 
 CHAT_ID  = 0
 TOKEN = API_TOKEN
