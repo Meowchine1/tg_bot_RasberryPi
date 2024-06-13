@@ -1,4 +1,5 @@
 from app_api import  get_state
+from wiringPi.state import *
 from fs_out.write import write_log
 
 
