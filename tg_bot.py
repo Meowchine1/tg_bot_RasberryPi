@@ -117,13 +117,15 @@ async def any_message(message: Message):
     print("mode4")
     refresh_chatid(message)
     files = get_log_names(".")
+    
     builder = InlineKeyboardBuilder()
 
     for file in files:
         builder.add(types.InlineKeyboardButton(
             text=file,
             callback_data=f"log_{file}")
-        )
+        )   
+    await message.reply("Выберите дату", reply_markup=builder.as_markup())     
 
 @dp.callback_query(F.data.startswith("log_"))
 async def callbacks_num(callback: types.CallbackQuery):
