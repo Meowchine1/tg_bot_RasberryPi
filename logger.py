@@ -4,6 +4,7 @@ from fs_out.write import write_log
 
 app_state = get_state()
 while(1):
+    print("APP STATE IS ", app_state)
     actual_app_state = get_state()
 
     if actual_app_state != app_state:
