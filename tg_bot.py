@@ -2,7 +2,8 @@ import asyncio
 import logging
 import sys
 import multiprocessing as mp
-from aiogram.types  import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButton
+from aiogram.types  import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButton , \
+    InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram import Bot, Dispatcher, html, types
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
@@ -31,14 +32,6 @@ bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
 @dp.message(CommandStart())
 async def command_start_handler(message: Message) -> None:
-    """
-    This handler receives messages with `/start` command
-    """
-    # Most event objects have aliases for API methods that can be called in events' context
-    # For example if you want to answer to incoming message you can use `message.answer(...)` alias
-    # and the target chat will be passed to :ref:`aiogram.methods.send_message.SendMessage`
-    # method automatically or call API method directly via
-    # Bot instance: `bot.send_message(chat_id=message.chat.id, ...)`
     kb = [
        [
            types.KeyboardButton(text=mode1),
@@ -62,7 +55,6 @@ async def command_start_handler(message: Message) -> None:
 async def send_message_by_timer():
     global CHAT_ID
     print(CHAT_ID)
-    #push_message("Катя")
      
     if CHAT_ID != 0:
         message = get_message()
@@ -125,16 +117,47 @@ async def any_message(message: Message):
     print("mode4")
     refresh_chatid(message)
     files = get_log_names(".")
-    await message.reply("Выберите дату") 
-    
+    builder = InlineKeyboardBuilder()
+
+    for file in files:
+        builder.add(types.InlineKeyboardButton(
+            text=file,
+            callback_data=f"log_{file}")
+        )
+
+@dp.callback_query(F.data.startswith("log_"))
+async def callbacks_num(callback: types.CallbackQuery):
+    log_file_name = callback.data.split("_")[1]
+    if not is_file_exist(".", log_file_name):
+        print("system error")
+    else:
+        print("file exist")    
     
 
-async def main() -> None:
-    # Initialize Bot instance with default bot properties which will be passed to all API calls
-    # стало (функцией-регистратором)
-    #dp.message.register(any_message, F.text)
-    # And the run events dispatching
+    await callback.answer()
+
+    #await message.reply("Выберите дату") 
+    # keyboard = types.InlineKeyboardMarkup()
+    # for file in files:
+    #     keyboard.add(types.InlineKeyboardButton(text=file, callback_data=f"file_{file}"))
+    # await message.reply("Выберите дату", reply_markup=keyboard)
     
+
+
+@dp.message(Command("random"))
+async def cmd_random(message: types.Message):
+    builder = InlineKeyboardBuilder()
+    builder.add(types.InlineKeyboardButton(
+        text="Нажми меня",
+        callback_data="random_value")
+    )
+    await message.answer(
+        "Нажмите на кнопку, чтобы бот отправил число от 1 до 10",
+        reply_markup=builder.as_markup()
+    )  
+
+async def main() -> None:
+
     scheduler = AsyncIOScheduler()
     scheduler.add_job(send_message_by_timer, trigger='interval', seconds=2, start_date=datetime.now())
     scheduler.start()
