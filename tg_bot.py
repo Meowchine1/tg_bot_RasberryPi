@@ -123,7 +123,7 @@ async def any_message(message: Message):
 
     for file in files:
         builder.add(types.InlineKeyboardButton(
-            text=file,
+            text=file.split(".")[0],
             callback_data=f"log_{file}")
         )   
     await message.answer("Выберите дату", reply_markup=builder.as_markup())     

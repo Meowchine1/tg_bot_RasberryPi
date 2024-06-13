@@ -25,7 +25,7 @@ def write_log(relative_path, message):
  
  
 def is_file_exist(relative_path, filename):
-    day_log = f"{relative_path}/logs/{filename}.txt"
+    day_log = f"{relative_path}/logs/{filename}"
     return os.path.exists(day_log)
 
 
