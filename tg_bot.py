@@ -130,16 +130,22 @@ async def any_message(message: Message):
         await message.answer("История пуста")
 
     builder = InlineKeyboardBuilder()
-
+    i = 0
     for file in files:
+        i+=1
         builder.add(types.InlineKeyboardButton(
             text=file.split(".")[0],
             callback_data=f"log_{file}")
         )
+        if i == 2:
+            i = 0
+            builder.row()
 
+            
+    builder.row()
     builder.add(types.InlineKeyboardButton(
             text="Найти файл более старый лог-файл",
-            callback_data="history")
+            callback_data="history", width=3, height=2)
         )
 
     await message.answer("Выберите дату", reply_markup=builder.as_markup())     
