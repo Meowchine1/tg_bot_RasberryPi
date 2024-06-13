@@ -1,4 +1,4 @@
-##!/usr/bin/python3
+#!/usr/bin/python3
 
 from datetime import date, datetime
 import os 
@@ -31,8 +31,8 @@ def is_file_exist(relative_path, filename):
 
 def get_log_names(relative_path, count=0):
 
-
-    names = [(f, datetime.fromtimestamp(os.path.getctime(join(relative_path+"/logs/", f)))) for f in listdir(relative_path+"/logs/") if isfile(join(relative_path+"/logs/", f))]
+    names = [(f, datetime.fromtimestamp(os.path.getctime(join(relative_path+"/logs/", f)))) \
+    for f in listdir(relative_path+"/logs/") if isfile(join(relative_path+"/logs/", f)) and f.endswith('.txt')]
  
     names.sort(key=lambda x: x[1])
      
@@ -89,7 +89,7 @@ def get_file_name(mounth, day):
 #print(get_days(".."))
 #print(get_mounths(".."))
 
-#print(get_log_names("..", 7))
+print(get_log_names("..", 7))
 
 # print(is_file_exist("..", "2024-06-10"))
 # print(get_log_names(".."))
