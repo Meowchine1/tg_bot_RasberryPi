@@ -13,4 +13,3 @@ while(1):
         log = f" Смена режима. {states_text[app_state.value]} --> {states_text[actual_app_state.value]}"
         write_log(".", log)
         app_state = actual_app_state
-
