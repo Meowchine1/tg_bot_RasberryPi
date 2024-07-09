@@ -30,22 +30,10 @@ def is_port_occupied_by_process(port, process_name):
         pass  # Процесс уже завершился или у нас нет прав на доступ
   return False
 
- 
-   
-
 # Запуск всех приложений
 
 subprocess.Popen(['python3', './app_server.py'])
 time.sleep(3)
-# port = 9999
-# process_name = "python"
-
-# if is_port_occupied_by_process(port, process_name):
-#    print(f"Порт {port} занят процессом {process_name}")
-# else:
-#    print(f"Порт {port} не занят процессом {process_name}")
-
-
 subprocess.Popen(['python', './tg_bot.py'])
 subprocess.Popen(['python', './wiring.py'])
 subprocess.Popen(['python', './logger.py'])

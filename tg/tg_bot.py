@@ -57,17 +57,10 @@ async def command_start_handler(message: Message) -> None:
 async def send_message_by_timer():
     global CHAT_ID
     print(CHAT_ID)
-
-    # refresh logs
-
-     
     if CHAT_ID != 0:
         message = get_message()
         if message:
             await bot.send_message(CHAT_ID, message)
- 
-
-
 
 @dp.message(F.text == "test")
 async def any_message(message: Message):
@@ -87,12 +80,9 @@ async def any_message(message: Message):
     set_mode1()
     print("mode1")
     refresh_chatid(message)
-    log = "Режим 1 включен. Реле отключится при пропаже сигнала"
-    #write_log(".", log) 
+    log = "Режим 1 включен. Реле отключится при пропаже сигнала" 
     await message.reply(log)
      
-    
-
 @dp.message(F.text == mode2)
 async def any_message(message: Message):
     turnoff_mode1()
@@ -102,9 +92,7 @@ async def any_message(message: Message):
     print("mode2")
     refresh_chatid(message)
     log = f"Режим 2. Без прерываний на {TIME_MEASURE} {TIME_NAME}"
-    #write_log(".", log) 
     await message.reply(log) 
-    
     
     
 @dp.message(F.text == mode3)
@@ -116,7 +104,6 @@ async def any_message(message: Message):
     print("mode3")
     refresh_chatid(message)
     log = "Режим 3. Без прерываний"
-    #write_log(".", log)
     await message.reply(log)  
 
 
@@ -124,7 +111,6 @@ async def any_message(message: Message):
 async def any_message(message: Message):
     print("mode4")
     refresh_chatid(message)
-    #files = get_log_names(".")
     files = get_log_names(".", 7)
     if files == []:
         await message.answer("История пуста")
@@ -194,8 +180,6 @@ async def callbacks_num(callback: types.CallbackQuery):
             text=day,
             callback_data=f"log_{day}_{mounth}")
         )
-    #await message.answer("Теперь выберите день", reply_markup=builder.as_markup())    
-
 
 
 async def main() -> None:
@@ -204,8 +188,6 @@ async def main() -> None:
     scheduler.add_job(send_message_by_timer, trigger='interval', seconds=2, start_date=datetime.now())
     scheduler.start()
     await dp.start_polling(bot)
-
-
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)

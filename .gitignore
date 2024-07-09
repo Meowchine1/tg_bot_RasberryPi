@@ -2,4 +2,6 @@
 ./sys
 ./pickle
 ./asyncio
+__pycache__/
+
 
